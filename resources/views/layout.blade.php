@@ -30,6 +30,14 @@
             border: 1px solid #495057;
         }
         
+        .card-title {
+            color: #f5f5f0 !important;
+        }
+        
+        .card-text {
+            color: #e8e8e3 !important;
+        }
+        
         .btn-primary {
             background-color: #5c7cfa;
             border-color: #5c7cfa;
@@ -52,10 +60,37 @@
         
         .game-card {
             transition: transform 0.2s;
+            position: relative;
+            overflow: hidden;
+            min-height: 250px;
         }
         
         .game-card:hover {
             transform: translateY(-5px);
+        }
+        
+        .game-card-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.5;
+            z-index: 1;
+        }
+        
+        .game-card-content {
+            position: relative;
+            z-index: 2;
+            background: rgba(42, 71, 94, 0.75);
+            backdrop-filter: blur(1px);
+            height: 100%;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
         }
         
         .price {

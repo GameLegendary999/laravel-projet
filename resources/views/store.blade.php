@@ -15,7 +15,10 @@
     @foreach($games as $game)
     <div class="col-md-4 mb-4">
         <div class="card game-card h-100">
-            <div class="card-body d-flex flex-column">
+            @if($game->image)
+                <div class="game-card-bg" style="background-image: url('{{ asset('images/games/' . $game->image) }}');"></div>
+            @endif
+            <div class="game-card-content d-flex flex-column">
                 <h5 class="card-title">{{ $game->name }}</h5>
                 <p class="card-text flex-grow-1">{{ $game->description }}</p>
                 <div class="mb-2">
