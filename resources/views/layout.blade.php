@@ -118,7 +118,13 @@
     <div class="container mt-4">
         @if(session('success'))
             <div class="alert alert-success">
-                {{ session('success') }}
+                {!! nl2br(e(session('success'))) !!}
+            </div>
+        @endif
+        
+        @if(session('warning'))
+            <div class="alert alert-warning">
+                {!! nl2br(e(session('warning'))) !!}
             </div>
         @endif
         

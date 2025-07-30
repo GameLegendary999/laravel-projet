@@ -59,18 +59,49 @@ class CartController extends Controller
         $user = $this->getDefaultUser();
         $cartItems = $user->cartItems;
         
+        $alreadyOwned = [];
+        $purchased = [];
+        
         foreach ($cartItems as $cartItem) {
-            // Ajouter à la bibliothèque
-            UserGame::create([
-                'user_id' => $user->id,
-                'game_id' => $cartItem->game_id,
-                'purchased_at' => now()
-            ]);
+            // Vérifier si le jeu est déjà dans la library
+            $existingUserGame = UserGame::where('user_id', $user->id)
+                                       ->where('game_id', $cartItem->game_id)
+                                       ->first();
             
-            // Supprimer du panier
-            $cartItem->delete();
+            if ($existingUserGame) {
+                // Jeu déjà possédé
+                $alreadyOwned[] = $cartItem->game->name;
+                $cartItem->delete(); // Supprimer du panier quand même
+            } else {
+                // Ajouter à la bibliothèque
+                UserGame::create([
+                    'user_id' => $user->id,
+                    'game_id' => $cartItem->game_id,
+                    'purchased_at' => now()
+                ]);
+                
+                $purchased[] = $cartItem->game->name;
+                $cartItem->delete();
+            }
         }
         
-        return redirect()->route('library')->with('success', 'Achat effectué ! Jeux ajoutés à votre bibliothèque.');
+        // Préparer les messages
+        $messages = [];
+        if (!empty($purchased)) {
+            $messages[] = '✅ Jeux achetés avec succès : ' . implode(', ', $purchased);
+        }
+        if (!empty($alreadyOwned)) {
+            foreach ($alreadyOwned as $gameName) {
+                $messages[] = '⚠️ Le jeu : ' . $gameName . ' est déjà dans votre library';
+            }
+        }
+        
+        if (empty($messages)) {
+            $message = 'Aucun jeu à acheter.';
+        } else {
+            $message = implode("\n", $messages);
+        }
+        
+        return redirect()->route('library')->with('success', $message);
     }
 }

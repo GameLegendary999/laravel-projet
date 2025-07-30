@@ -27,7 +27,9 @@
             <div class="game-card-content">
                 <h5 class="card-title">{{ $game->name }}</h5>
                 <p class="card-text">{{ Str::limit($game->description, 100) }}</p>
-                <span class="badge bg-info">{{ $game->genre }}</span>
+                <div class="mb-2">
+                    <span class="badge bg-info">{{ $game->genre }}</span>
+                </div>
                 <div class="mt-3">
                     <span class="price fs-5">{{ number_format($game->price, 2) }}€</span>
                 </div>

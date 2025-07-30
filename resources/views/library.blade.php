@@ -25,7 +25,7 @@
                     <span class="badge bg-info">{{ $game->genre }}</span>
                 </div>
                 <div class="text-muted">
-                    <small>Acheté le {{ $game->pivot->purchased_at->format('d/m/Y') }}</small>
+                    <small>Acheté le {{ \Carbon\Carbon::parse($game->pivot->purchased_at)->format('d/m/Y') }}</small>
                 </div>
                 <div class="mt-3">
                     <button class="btn btn-primary btn-sm w-100">
