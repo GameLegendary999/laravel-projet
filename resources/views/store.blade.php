@@ -14,7 +14,7 @@
 <div class="row">
     @foreach($games as $game)
     <div class="col-md-4 mb-4">
-        <div class="card game-card h-100">
+        <div class="card game-card" onclick="showGameDetails('{{ $game->title }}', '{{ $game->price }}', '{{ addslashes($game->description) }}', {{ $game->id }}, {{ in_array($game->id, $libraryGameIds ?? []) ? 'true' : 'false' }})">
             @if($game->image)
                 <div class="game-card-bg" style="background-image: url('{{ asset('images/games/' . $game->image) }}');"></div>
             @endif

@@ -20,7 +20,7 @@
 <div class="row">
     @foreach($featuredGames as $game)
     <div class="col-md-4 mb-4">
-        <div class="card game-card h-100">
+        <div class="card game-card h-100" onclick="showGameDetails('{{ $game->name }}', '{{ number_format($game->price, 2) }}', '{{ addslashes($game->description) }}', {{ $game->id }}, {{ in_array($game->id, $libraryGameIds ?? []) ? 'true' : 'false' }})">
             @if($game->image)
                 <div class="game-card-bg" style="background-image: url('{{ asset('images/games/' . $game->image) }}');"></div>
             @endif
