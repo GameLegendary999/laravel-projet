@@ -38,6 +38,22 @@
             color: #e8e8e3 !important;
         }
         
+        h1, h2, h3, h4, h5, h6 {
+            color: #f5f5f0 !important;
+        }
+        
+        p, .lead {
+            color: #e8e8e3 !important;
+        }
+        
+        .text-muted {
+            color: #c7d5e0 !important;
+        }
+        
+        td, th {
+            color: #e8e8e3 !important;
+        }
+        
         .btn-primary {
             background-color: #5c7cfa;
             border-color: #5c7cfa;
